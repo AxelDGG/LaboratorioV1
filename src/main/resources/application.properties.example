@@ -1,0 +1,14 @@
+spring.application.name=telegram-agent-phase2
+
+telegram.bot.name=${TELEGRAM_BOT_NAME:MiOraclePlannerBot}
+telegram.bot.token=${TELEGRAM_BOT_TOKEN:your_bot_token_here}
+
+agent.ai.enabled=${AGENT_AI_ENABLED:true}
+agent.ai.base-url=${AGENT_AI_BASE_URL:https://api.openai.com/v1}
+agent.ai.api-key=${AGENT_AI_API_KEY:your_api_key_here}
+agent.ai.model=${AGENT_AI_MODEL:gpt-4o-mini}
+agent.ai.timeout-seconds=30
+
+logging.level.root=INFO
+logging.level.com.oraclebot=DEBUG
+

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telegram-agent-phase2
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: telegram-agent-phase2
+  template:
+    metadata:
+      labels:
+        app: telegram-agent-phase2
+    spec:
+      containers:
+        - name: telegram-agent-phase2
+          image: telegram-agent-phase2:0.1.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TELEGRAM_BOT_NAME
+              value: "MiOraclePlannerBot"
+            - name: TELEGRAM_BOT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: telegram-agent-secret
+                  key: TELEGRAM_BOT_TOKEN
+            - name: AGENT_AI_ENABLED
+              value: "false"
+            - name: AGENT_AI_BASE_URL
+              value: "https://api.openai.com/v1"
+            - name: AGENT_AI_MODEL
+              value: "gpt-4o-mini"
+            - name: AGENT_AI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: telegram-agent-secret
+                  key: AGENT_AI_API_KEY
+                  optional: true
+
